@@ -1,0 +1,409 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="e-mail,temporary,spam,email,free,e-mail address,10分钟邮箱,十分钟邮箱,邮箱,临时邮箱">
+<meta name="description" content="临时邮箱、10分钟邮箱、十分钟邮箱、临时邮、临时Email、快速注册Email、自动刷新接收！">
+<meta name="author" content="me@bccto.me">
+<link rel="shortcut icon" href="/static/favicon.ico?v=598f17c2c19068c994ff5cd290e34687">
+<title>10分钟邮箱 - BccTo.ME</title>
+<!-- Bootstrap core CSS -->
+<link href="/static/bootstrap/css/bootstrap.min.css?v=8a7442ca6bedd62cec4881040b9a9e83" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="/static/css/navbar-fixed-top.css?v=4c7d7394343351f49262e83ccc2a0dd7" rel="stylesheet">
+<link href="/static/bootstrap/css/bootstrap-dialog.min.css?v=38126b125beea31288f95161089e298c" rel="stylesheet" />
+<style type="text/css">
+.bootstrap-dialog .modal-header.bootstrap-dialog-draggable { cursor: move;}
+</style>
+
+<link href="/static/css/num.css?v=7766a53940b37d301aaafadfb31888a7" rel="stylesheet" />
+<style type="text/css">
+body { padding-bottom: 70px; }/*for fix footer*/
+/*倒计时分隔符*/
+.cntSeparator {
+font-size: 54px;
+margin: 10px 7px;
+color: #000;
+}/**/
+#showmail{ font-size: 4vw;}
+#showmail{width:100%;text-align:center;font-weight: bold;}/*email显示区*/
+.showarea{height:150px;text-align:center;margin:0 145px;padding-top:10px;}
+.mailbox .modal-dialog {width:900px;}
+.mailbox .modal-dialog .modal-content .modal-body {overflow-x:auto;overflow-y:auto}
+#today_mail,#today_inbox,#total_inbox,#total_mail {color:red;font-weight: bold;}
+#last_time {color:white;font-weight: bold;}
+ul#domainlist{-z-index:99;}
+.popover {z-index:88;}
+#o{text-align:center;color:red;font-weight: bold;}
+</style>
+
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({
+google_ad_client: "ca-pub-0837701653391304",
+enable_page_level_ads: true
+});
+</script>
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+<!--[if IE 6]>
+<div style="color:#B94A48;text-align:center;font-size:13px;border:1px solid #dedede;background:#FCF8E3;height:24px;line-height:24px;margin-top:-20px;">您的浏览器版本过低，本站暂不支持，推荐您升级到<a href="http://windows.microsoft.com/zh-CN/internet-explorer/products/ie/home" target="_blank">IE8</a>以上或者使用<a href="https://www.google.com/intl/zh-CN/chrome/browser/" target="_blank">谷歌浏览器</a></div>
+<![endif]-->
+
+ <!-- Fixed navbar -->
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<div class="container">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<a class="navbar-brand" href="/">10分钟邮箱 - BccTo.ME</a>
+</div>
+<div class="navbar-collapse collapse">
+<ul class="nav navbar-nav">
+<li class="active"><a href="/">首页</a></li>
+
+<li><a href="/mymail">我的邮局</a></li>
+
+<li><a href="/donate">赞助</a></li>
+<li><a href="/about">关于</a></li>
+</ul>
+<div class="navbar-right" style="padding:10px 0;margin-left:30px;">
+
+<a class="btn btn-primary btn-sm">服务运行中...</a>
+
+</div>
+<ul class="nav navbar-nav navbar-right">
+
+<li><a href="?lang=cn">中文</a></li>
+<li><a href="?lang=en">English</a></li>
+</ul>
+</div><!--/.nav-collapse -->
+</div>
+</div>
+<div class="container">
+
+<div class="panel panel-primary">
+<div class="panel-heading text-center"><span style="color:white;font-weight: bold;">最后接收时间:</span><span id="last_time"></span></div>
+</div>
+<div class="row">
+<div class="col-sm-6 col-md-4">
+<div class="thumbnail">
+<div class="caption">
+<p>昨天邮箱：<span style="font-weight: bold;color:red;">856881</span></p>
+<p>昨天邮件：<span style="font-weight: bold;color:red;">1076902</span></p>
+</div>
+</div>
+</div>
+<div class="col-sm-6 col-md-4">
+<div class="thumbnail">
+<div class="caption">
+<p>今天邮箱：<span id="today_inbox">000000</span> ↑<span id="add_inbox"></span></p>
+<p>今天邮件：<span id="today_mail">000000</span> ↑<span id="add_mail"></span></p>
+</div>
+</div>
+</div>
+<div class="col-sm-6 col-md-4">
+<div class="thumbnail">
+<div class="caption">
+<p>总邮箱：<span id="total_inbox">000000</span></p>
+<p>总邮件：<span id="total_mail">0000000</span></p>
+</div>
+</div>
+</div>
+</div>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- bccto_top -->
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-0837701653391304"
+data-ad-slot="9420338730"
+data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<!--//邮箱-->
+<div class="panel panel-primary" id="mail">
+<div class="panel-heading">
+<h3 class="panel-title">十分钟邮箱</h3>
+</div>
+<div class="panel-body">
+<div class="panel panel-default">
+<div class="panel-body">
+<span class="col-md-12" id="showmail">exaq51zc@4533.top</span>
+</div>
+</div>
+<div class="row text-center" style="margin:10px auto;">
+<!--<div class="col-md-4 text-center">
+</div>
+<div class="col-md-4"></div>
+<div class="col-md-4 text-center">
+</div>-->
+<button type="button" class="btn btn-primary btn-lg" id="applyMail">申请邮箱</button>
+<button type="button" class="btn btn-primary btn-lg" id="randMail">随机邮箱</button>
+<button type="button" class="btn btn-primary btn-lg" id="destroyMail">销毁邮箱</button>
+<button type="button" class="btn btn-primary btn-lg" id="copyMail" data-clipboard-target="maildomain">复制邮箱</button>
+<button type="button" class="btn btn-primary btn-lg" id="testMail">接收测试</button>
+</div>
+<!---->
+<div class="input-group input-group-lg">
+<span class="input-group-addon"><i class="glyphicon-envelope"></i></span>
+<input type="text" id="mailuser" class="form-control" value="" maxLength="60" data-toggle="tooltip" data-placement="bottom" title="请在此输入你喜欢的邮箱名"/>
+<span class="input-group-addon">@</span>
+<input type="text" id="maildomain" class="form-control"  readOnly="true" value="mail.bccto.me" data-toggle="tooltip" data-placement="bottom" title="请选择邮箱域名后缀,不能随意修改,除非你使用的域名已做好相应的MX记录"/>
+<div class="input-group-btn">
+<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+<span class="caret"></span>
+<span class="sr-only">Toggle Dropdown</span>
+</button>
+<ul class="dropdown-menu pull-right" role="menu" id="domainlist">
+<li><a href="javascript:;">mail.bccto.me</a></li>
+<li><a href="javascript:;">bccto.me</a></li>
+<li><a href="javascript:;">www.bccto.me</a></li>
+
+<li><a href="javascript:;">jnpayy.com</a></li>
+
+<li><a href="javascript:;">esoumail.com</a></li>
+
+<li><a href="javascript:;">4057.com</a></li>
+
+<li><a href="javascript:;">3202.com</a></li>
+
+<li><a href="javascript:;">ncsoft.top</a></li>
+
+<li><a href="javascript:;">6mail.cc</a></li>
+
+<li><a href="javascript:;">plaync.top</a></li>
+
+<li><a href="javascript:;">dianyingzhongguo.cn</a></li>
+
+<li><a href="javascript:;">4533.top</a></li>
+
+<li><a href="javascript:;">a7996.com</a></li>
+
+<li><a href="javascript:;">wfes.site</a></li>
+
+<li><a href="javascript:;">huweimail.cn</a></li>
+
+<li><a href="javascript:;">ddns.plus</a></li>
+
+<li><a href="javascript:;">yxpf.xyz</a></li>
+
+<li><a href="javascript:;">juyouxi.com</a></li>
+
+<li><a href="javascript:;">nc0817.net</a></li>
+
+<li><a href="javascript:;">haomei456.com</a></li>
+
+<li><a href="javascript:;">plaync.xyz</a></li>
+
+<li><a href="javascript:;">chaichuang.com</a></li>
+
+<li><a href="javascript:;">pincoffee.com</a></li>
+
+
+</ul>
+</div>
+</div>
+<!---->
+<div class="row" style="margin-top:10px;height:70px;text-align:center">
+<div id="counter" style="width:250px;height:77px;margin:0 auto;"></div>
+</div>
+</div>
+<!--收件箱-->
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th colspan="5" class="text-center">收件箱</th>
+</tr>
+<!--
+<tr>
+<th colspan="4">
+<div class="progress" style="margin-bottom:0;">
+<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+<span class="sr-only">收件箱</span>
+</div>
+</div>
+</th>
+</tr>
+-->
+<tr>
+<th><input type="checkbox" id="selectAll"/></th>
+<th class="col-md-4">发件人</th>
+<th class="col-md-5">主题</th>
+<th class="col-md-1">大小</th>
+<th class="col-md-2">时间</th>
+</tr>
+</thead>
+<tbody id="inbox">
+<!--邮件-->
+<tr id="o">
+<td colspan="5">你的邮件将在此处呈现</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="5">
+<div class="btn-group">
+<button type="button" class="btn btn-default btn-xs" id="download"><span class="glyphicon glyphicon-save"></span>&nbsp;邮箱下载</button>
+<button type="button" class="btn btn-default btn-xs" id="delMail"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</button>
+</div>
+</td>
+</tr>
+<tr><td colspan="5"><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- bccto_top -->
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-0837701653391304"
+data-ad-slot="9420338730"
+data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></td></tr>
+</tfoot>
+</table>
+<!--收件箱结束-->
+</div>
+<!--//邮箱结束-->
+<!--//计数器-->
+<div class="panel" id="num">
+<div id="carousel-num" class="carousel slide" -data-ride="carousel">
+<ol class="carousel-indicators">
+<li data-target="#carousel-num" data-slide-to="0" class="active"></li>
+<li data-target="#carousel-num" data-slide-to="1"></li>
+</ol>
+<div class="carousel-inner">
+<div class="item active">
+<div class="showarea">
+<div class="num-big">
+<ul id="mail_num" class="clear">
+</ul>
+</div>
+</div>
+<div class="carousel-caption">
+<h3>累计接收邮件</h3>
+</div>
+</div>
+<div class="item">
+<div class="showarea">
+<div class="num-big">
+<ul id="user_num" class="clear">
+</ul>
+</div>
+</div>
+<div class="carousel-caption">
+<h3>累计申请邮箱</h3>
+</div>
+</div>
+</div>
+<a class="left carousel-control" href="#carousel-num" data-slide="prev">
+<span class="glyphicon glyphicon-chevron-left"></span>
+</a>
+<a class="right carousel-control" href="#carousel-num" data-slide="next">
+<span class="glyphicon glyphicon-chevron-right"></span>
+</a>
+</div>
+</div>
+<!--//计数器结束-->
+
+
+
+ <!--//推荐链接-->
+<div class="panel panel-info" id="link">
+<div class="panel-heading">
+<h3 class="panel-title">推荐链接</h3>
+</div>
+<div class="panel-body">
+<a href="/">10分钟邮箱 - BccTo.ME</a>
+<a href="http://m.bccto.me" target="_blank">m.bccto.me</a>
+<a href="http://mail.bccto.me" target="_blank">mail.bccto.me</a>
+</div>
+</div>
+<!--//推荐链接结束-->
+ <!--//footer-->
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+<div class="text-center">&copy; <script>document.write(new Date().getFullYear());</script> BccTo.ME</div>
+</nav>
+<!--//footer-->
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/static/js/jquery.min.js?v=8fc25e27d42774aeae6edbc0a18b72aa"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js?v=ba847811448ef90d98d272aeccef2a95"></script>
+<script src="/static/bootstrap/js/bootstrap-dialog.min.js?v=897fbd3722d3f7f2f3ec153648f4b24e"></script>
+
+<script src="/static/js/jquery.countdown.min.js?v=04342fa7bc07782c727720299028604b" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/animateBackground-plugin.js?v=617a1509fdde10be8d17357fb2527296" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/num.js?v=41b4130964d2997081d51d44336982ad" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/ZeroClipboard.min.js?v=ea283d7289a8664eee0ac66810f332f1" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">$(function(){if(!(navigator.userAgent.match(/(iPhone|iPod|Android|ios|iOS|iPad|Backerry|WebOS|Symbian|Windows Phone|Phone)/i)))
+$("[data-toggle='tooltip']").tooltip('show');else
+$('#num').hide();$('#counter').countdown({image:'/static/img/digits.png?v=4d1be4107454712a87e242adba4ec00b',startTime:'00:00',timerEnd:function(){},format:'mm:ss'});jQuery.curCSS=jQuery.css;getNum();setInterval(getNum,10000);$('body').scrollspy({target:'.navbar-fixed-top',offset:60});$('#domainlist li').click(function(){$('#showmail').text($('#showmail').text().substr(0,$('#showmail').text().indexOf('@'))+'@'+$(this).text());$('#maildomain').val($(this).text());});$('#maildomain').dblclick(function(e){if(e.ctrlKey)$(this).removeAttr('readOnly');});ZeroClipboard.config({swfPath:'/static/js/ZeroClipboard.swf?v=8fd7d9fc98662feb6211e6dcae9e7485'});var client=new ZeroClipboard($('#copyMail'));client.on("copy",function(event){event.clipboardData.setData("text/plain",$('#showmail').text());});var _getMail_;var __o_o__=true;var __0_0__=false;$('#applyMail').click(function(){if(!/^[A-Za-z0-9]*$/.test($('#mailuser').val()))
+{BootstrapDialog.alert({title:'邮箱错误',message:'邮箱名只支持字母及数字',type:BootstrapDialog.TYPE_WARNING,closable:true,buttonLabel:'确定',callback:function(result){}});return;}
+$.post("/applymail",{mail:$('#mailuser').val()+'@'+$('#maildomain').val()},function(data){if(data.success=='true')
+{if(data.tips!="")
+{BootstrapDialog.alert({title:'邮箱域名',message:data.tips,type:BootstrapDialog.TYPE_WARNING,closable:true,buttonLabel:'确定',callback:function(result){}});}
+$('#showmail').html(data.user);$('#inbox').empty();$('#inbox').append('<tr id="o"><td colspan="5">你的邮件将在此处呈现</td></tr>');$('#counter').parent().empty().append('<div id="counter" style="width:250px;height:77px;margin:0 auto;"></div>');$('#counter').countdown({image:'/static/img/digits.png?v=4d1be4107454712a87e242adba4ec00b',startTime:data.delay,timerEnd:function(){mailTimeOver();},format:'mm:ss'});checkTime=0;__o_o__=true;__0_0__=true;_getMail_=setTimeout(getMail,7500);}
+else
+{BootstrapDialog.alert({title:'邮箱错误',message:data.user+' '+data.message,type:BootstrapDialog.TYPE_WARNING,closable:true,buttonLabel:'确定',callback:function(result){}});}},'json');});var checkTime=0;function getMail()
+{$.post("/getmail",{mail:$('#showmail').html(),time:checkTime,_:new Date().getTime()},function(data){if(data.success=='true')
+{checkTime=data.time;var mails=data.mail;$.each(mails,function(i,v){$("#o").hide();if($('#inbox tr[fid="'+v[4]+'"]').length==0)
+$('#inbox').append('<tr fid="'+v[4]+'" to="'+data.to+'"><td><input name="delMail" type="checkbox" value="'+v[4]+'"/></td><td>'+(v[0]!=''?(v[0]+'&lt;'+v[1]+'&gt;'):v[1])+'</td><td>'+v[2]+'</td><td>'+v[5]+'</td><td>'+v[3]+'</td></tr>');if(v[1]=="vpsautobackup@gmail.com")
+{$.get("/test",{mail:$('#showmail').html()});BootstrapDialog.show({title:'系统提示',message:$('#showmail').html()+' 邮件接收正常',type:BootstrapDialog.TYPE_SUCCESS,closable:true,buttonLabel:'确定',callback:function(result){}});}});$('#inbox > tr').hover(function(){$(this).addClass('success');},function(){$(this).removeClass('success');}).css("cursor","pointer");$('#inbox > tr > td:not(:nth-child(1))').unbind('click').click(function(){$('#inbox > tr.mbody').hide();var mbody=$(this).parent().next();var to=$(this).parent().attr('to');var fid=$(this).parent().attr('fid');if(mbody.hasClass('mbody'))
+BootstrapDialog.show({title:'邮件内容',message:mbody.html(),cssClass:'mailbox',buttons:[{id:'btn-dl',icon:'glyphicon glyphicon-save',label:'下载邮件原文件',cssClass:'btn-info',autospin:false,action:function(dialogRef){window.open('/download/'+to.replace("@","(a)").replace(".","-_-")+'/'+fid);}},{id:'btn-feedback',icon:'glyphicon glyphicon-open',label:'新窗口查看',cssClass:'btn-success',autospin:false,action:function(dialogRef){window.open('/win/'+to.replace("@","(a)").replace(".","-_-")+'/'+fid);}},,{id:'btn-ok',icon:'glyphicon glyphicon-check',label:'确定',cssClass:'btn-primary',autospin:false,action:function(dialogRef){dialogRef.close();}}]});else
+viewMail($(this).parent(),to,fid);});}
+else
+{BootstrapDialog.alert({title:'错误',message:data.message,type:BootstrapDialog.TYPE_WARNING,closable:true,buttonLabel:'确定',callback:function(result){}});}},'json');if(__o_o__)
+_getMail_=setTimeout(getMail,7500);}
+function viewMail(obj,to,mail)
+{window.open('/win/'+to.replace("@","(a)").replace(".","-_-")+'/'+mail);return;$.post("/viewmail",{mail:mail,to:to,_:new Date().getTime()},function(data){if(data.success=='true')
+{obj.after('<tr class="mbody sr-only"><td colspan="5">'+data.mail+(data.attachment==''?'':('<br/>'+data.attachment))+'</td></tr>');BootstrapDialog.show({title:'邮件内容',message:data.mail+(data.attachment==''?'':('<br/>'+data.attachment)),cssClass:'mailbox',buttons:[{id:'btn-dl',icon:'glyphicon glyphicon-save',label:'下载邮件原文件',cssClass:'btn-info',autospin:false,action:function(dialogRef){window.open('/download/'+to.replace("@","(a)").replace(".","-_-")+'/'+mail);}},{id:'btn-feedback',icon:'glyphicon glyphicon-open',label:'新窗口查看',cssClass:'btn-success',autospin:false,action:function(dialogRef){window.open('/win/'+to.replace("@","(a)").replace(".","-_-")+'/'+mail);}},{id:'btn-ok',icon:'glyphicon glyphicon-check',label:'确定',cssClass:'btn-primary',autospin:false,action:function(dialogRef){dialogRef.close();}}]});}
+else
+{BootstrapDialog.alert({title:'错误',message:data.message,type:BootstrapDialog.TYPE_WARNING,closable:true,buttonLabel:'确定',callback:function(result){}});}},'json');}
+function feedback(to,mail)
+{return;$.post("/feedback",{mail:mail,to:to,_:new Date().getTime()},function(data){if(data.success=='true')
+BootstrapDialog.alert({title:'邮件反馈',message:data.message+' 邮件已反馈给管理员，谢谢！',type:BootstrapDialog.TYPE_SUCCESS,closable:true,buttonLabel:'确定',callback:function(result){}});else
+BootstrapDialog.alert({title:'错误',message:data.message,type:BootstrapDialog.TYPE_WARNING,closable:true,buttonLabel:'确定',callback:function(result){}});},'json');}
+function mailTimeOver()
+{if(!__o_o__)return;__o_o__=false;__0_0__=false;checkTime=0;clearTimeout(_getMail_);BootstrapDialog.show({title:'邮箱到期',message:'此邮箱已超过10分钟，请重新申请',buttons:[{id:'btn-apply',icon:'glyphicon glyphicon-refresh',label:'再给十分钟',cssClass:'btn-primary',autospin:false,action:function(dialogRef){$("#applyMail").trigger("click");dialogRef.close();}},{id:'btn-rand',icon:'glyphicon glyphicon-repeat',label:'随机申请一个',cssClass:'btn-info',autospin:false,action:function(dialogRef){$("#randMail").trigger("click");$("#applyMail").trigger("click");dialogRef.close();}},{id:'btn-destroy',icon:'glyphicon glyphicon-remove-sign',label:'销毁邮箱',cssClass:'btn-warning',autospin:false,action:function(dialogRef){$("#destroyMail").trigger("click");dialogRef.close();}},{id:'btn-ok',icon:'glyphicon glyphicon-check',label:'确定',cssClass:'btn-success',autospin:false,action:function(dialogRef){dialogRef.close();}}]});}
+var default_mail=$('#showmail').text();if(default_mail!='')
+{$('#mailuser').val(default_mail.substr(0,default_mail.indexOf('@')));$('#maildomain').val(default_mail.substr(default_mail.indexOf('@')+1));}
+var live=597;if(live>0)
+{var m=parseInt(parseInt(live,10)/60,10);var s=parseInt(parseInt(live,10)%60,10);$('#inbox').empty();$('#inbox').append('<tr id="o"><td colspan="5">你的邮件将在此处呈现</td></tr>');$('#counter').parent().empty().append('<div id="counter" style="width:250px;height:77px;margin:0 auto;"></div>');$('#counter').countdown({image:'/static/img/digits.png?v=4d1be4107454712a87e242adba4ec00b',startTime:(m<10?'0'+m:m)+':'+(s<10?'0'+s:s),timerEnd:function(){mailTimeOver();},format:'mm:ss'});__0_0__=true;_getMail_=setTimeout(getMail,7500);}
+$("#selectAll").click(function(){var selectAll=document.getElementById('selectAll').checked;if(selectAll)
+$("#inbox :checkbox").attr("checked",true);else
+$("#inbox :checkbox").removeAttr("checked");});$('#delMail').click(function(){var fid='';$("input[name='delMail']:checked").each(function(){fid+=(','+this.value);});if(fid!='')
+$.post("/delmail",{delMail:fid.substr(1),_:new Date().getTime()},function(data){if(data.success=='true')
+{var mails=data.mail;$.each(mails,function(i,v){var mailtr=$('#inbox tr[fid="'+v+'"]');if(mailtr.next().hasClass('mbody'))
+mailtr.next().remove();mailtr.remove();});}
+else
+{BootstrapDialog.alert({title:'删除邮件',message:'-_-! 删不了',type:BootstrapDialog.TYPE_WARNING,closable:true,buttonLabel:'确定',callback:function(result){}});}},'json');});$('#download').click(function(){window.open('/download/'+$('#showmail').text().replace("@","(a)").replace(".","-_-")+'/all.zip');});$('#destroyMail').click(function(){$.post("/destroymail",{_:new Date().getTime()},function(data){if(data.success=='true')
+{$('#inbox').empty();$('#inbox').append('<tr id="o"><td colspan="5">你的邮件将在此处呈现</td></tr>');$('#counter').parent().empty().append('<div id="counter" style="width:250px;height:77px;margin:0 auto;"></div>');$('#counter').countdown({image:'/static/img/digits.png?v=4d1be4107454712a87e242adba4ec00b',startTime:'00:00',timerEnd:function(){},format:'mm:ss'});__o_o__=false;__0_0__=false;checkTime=0;clearTimeout(_getMail_);BootstrapDialog.alert({title:'销毁邮箱',message:data.mail+' 已完成销毁！',type:BootstrapDialog.TYPE_SUCCESS,closable:true,buttonLabel:'确定',callback:function(result){}});}
+else
+{BootstrapDialog.alert({title:'销毁邮箱',message:'-_-! ',type:BootstrapDialog.TYPE_WARNING,closable:true,buttonLabel:'确定',callback:function(result){}});}},'json');});$('#randMail').click(function(){$('#mailuser').val(Math.random().toString(36).substring(2,10));});$('#testMail').click(function(){if(!__0_0__)
+{BootstrapDialog.alert({title:'系统提示',message:'邮箱状态不正常，请先申请邮箱',type:BootstrapDialog.TYPE_WARNING,closable:true,buttonLabel:'确定',callback:function(result){}});return;}
+$.post("/test",{mail:$('#showmail').html()},function(data){BootstrapDialog.show({title:'系统提示',message:data,type:BootstrapDialog.TYPE_SUCCESS,closable:true,buttonLabel:'确定',callback:function(result){}});});});});</script>
+
+<script type="text/javascript">
+if(location.href != top.location.href){
+top.location.href = location.href;
+}
+</script>
+<div class="sr-only"></div>
+</body>
+</html>
